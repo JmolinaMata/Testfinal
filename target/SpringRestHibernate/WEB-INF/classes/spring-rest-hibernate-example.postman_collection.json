@@ -1,0 +1,100 @@
+{
+	"info": {
+		"_postman_id": "f481ab0e-83a3-4e35-b28f-dc9ee31ee276",
+		"name": "spring-rest-hibernate-example",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get all countries",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/SpringRestHibernate/getCountries",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"SpringRestHibernate",
+						"getCountries"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get country by id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/SpringRestHibernate/getCountry/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"SpringRestHibernate",
+						"getCountry",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Save countries",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"countries\":[\n        {\"cname\": \"Irlanda\", \"cpopulation\": 1890},\n        {\"cname\": \"Portugal\", \"cpopulation\": 1200}\n    ]\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/SpringRestHibernate/save",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"SpringRestHibernate",
+						"save"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
