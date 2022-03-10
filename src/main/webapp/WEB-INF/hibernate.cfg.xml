@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:task="http://www.springframework.org/schema/task"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+    					http://www.springframework.org/schema/beans/spring-beans.xsd 
+    					http://www.springframework.org/schema/context 
+    					http://www.springframework.org/schema/context/spring-context.xsd 
+    					http://www.springframework.org/schema/jee 
+    					http://www.springframework.org/schema/jee/spring-jee.xsd 
+    					http://www.springframework.org/schema/tx 
+    					http://www.springframework.org/schema/tx/spring-tx.xsd 
+    					http://www.springframework.org/schema/task 
+    					http://www.springframework.org/schema/task/spring-task.xsd">
+           
+           <tx:annotation-driven  transaction-manager="transactionManager" />
+
+	<!-- Database details -->
+	<bean id="dbBean"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url"
+			value="jdbc:mysql://localhost:3306/springresthibernate" />
+		<property name="username" value="root" />
+		<property name="password" value="root" />
+	</bean>
+	<!-- 
+          <bean id="dbBean" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+             <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+             <property name="url" value="jdbc:mysql://localhost:3306/springdata" />
+             <property name="username" value="root" />
+             <property name="password" value="root" />
+           </bean>	
+	-->
+	<!-- Hibernate session factory -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dbBean" />
+		<property name="annotatedClasses">
+			<array>
+				<value>com.curso.hellorest.component.Country</value>
+			</array>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+				<prop key="hibernate.hbm2ddl.auto">validate</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.id.new_generator_mappings">true</prop>
+			</props>
+		</property>
+	</bean>
+
+	  <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager" 
+	  		p:sessionFactory-ref="sessionFactory">
+		</bean>
+		
+		
+<!--    <task:scheduled-tasks scheduler="scheduler">
+        <task:scheduled ref="taskBean" method="t1" fixed-delay="5000" />
+        <task:scheduled ref="taskBean" method="t2" fixed-rate="5000" />
+        <task:scheduled ref="taskBean" method="t3" fixed-rate="60000" initial-delay="60000" />
+        <task:scheduled ref="taskBean" method="t4" cron="*/2 * * * * *" />
+    </task:scheduled-tasks>
+ 
+    <task:scheduler id="scheduler"/>
+
+	<bean id="taskBean" class="com.curso.hellorest.schedule.TaskBean"></bean>
+-->    		
+</beans>
