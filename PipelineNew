@@ -1,0 +1,17 @@
+
+pipeline {
+    agent any
+      
+    stages {
+        stage('Build') {
+            steps {
+                sh 'mvn -B -DskipTests clean package'
+            }
+        }
+        stage('sast') {
+            steps {
+                sh 'sonar-scanner -Dsonar.projectKey=JorgeTest -Dsonar.sources=. -Dsonar.java.libraries=. -Dsonar.java.binaries=. -Dsonar.host.url=http://localhost:9000 -Dsonar.login=04d80da0c7b8b3582feb1a96980d882a089e5b83'
+            }
+        }
+    }
+}
